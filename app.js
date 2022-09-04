@@ -14,11 +14,18 @@ const pageController = require('./controllers/pageController');
 const app = express();
 
 //* Connect DB
-mongoose.connect('mongodb://localhost/pcat-test-db', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  // useFindAndModify: false,
-});
+mongoose.connect(
+  'mongodb+srv://bascher:7TiYrO7UQ30nTkpR@cluster0.7wsf8t9.mongodb.net/pcat-db?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // useFindAndModify: false,
+  }
+).then(() => {
+  console.log("db connected");
+}).catch((err) => {
+  console.log(err);
+})
 
 //* TEMPLATE ENGINE
 app.set('view engine', 'ejs');
@@ -48,7 +55,7 @@ app.get('/photos/edit/:id', pageController.getEditPage);
 //! **************************************************************
 //* --------------------------------------------------------------
 //! **************************************************************
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server listening on ${port}`);
 });
