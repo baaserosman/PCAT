@@ -10,7 +10,6 @@ const ejs = require('ejs');
 const photoController = require('./controllers/photoControllers');
 const pageController = require('./controllers/pageController');
 
-
 const app = express();
 
 //* Connect DB
